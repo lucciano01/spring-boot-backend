@@ -17,9 +17,13 @@ import com.luciano.cursomc.services.CategoriaService;
 @RequestMapping(value="/categorias")
 public class CategoriaResource {
 	
+	
+	//injenção de dependencia
 	@Autowired
 	private CategoriaService service;
 	
+	
+	//mesmo conceito do REST a interrogação no response é que o retorno pode ser qualquer objeto
 	@RequestMapping(method= RequestMethod.GET, value="/{id}")
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 		Categoria categoria = service.buscar(id);
