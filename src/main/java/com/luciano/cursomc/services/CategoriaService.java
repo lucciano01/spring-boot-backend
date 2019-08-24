@@ -9,9 +9,7 @@ import com.luciano.cursomc.domain.Categoria;
 import com.luciano.cursomc.repositories.CategoriaRepository;
 import com.luciano.cursomc.services.exceptions.ObjectNotFoundExeception;
 
-import javassist.tools.rmi.ObjectNotFoundException;
-
-
+	
 //anotacao da classe de servico
 @Service
 public class CategoriaService {
