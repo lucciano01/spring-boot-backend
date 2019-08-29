@@ -25,5 +25,9 @@ public class CategoriaService {
 		Optional<Categoria> categoria = repo.findById(id);
 		return  categoria.orElseThrow(() -> new ObjectNotFoundExeception("Objeto não encontrado! Id: " +id+ " , Tipo: " +Categoria.class.getName()));
 	}
+	
+	public Categoria insertCategoria(Categoria categoria) {
+		return repo.save(categoria);
+	}
 
 }
