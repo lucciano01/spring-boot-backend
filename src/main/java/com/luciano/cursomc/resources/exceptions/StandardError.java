@@ -1,6 +1,9 @@
 package com.luciano.cursomc.resources.exceptions;
 
 import java.io.Serializable;
+import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class StandardError implements Serializable {
 
@@ -9,6 +12,7 @@ public class StandardError implements Serializable {
 	
 	private Integer statusHttp;
 	private String msg;
+	@JsonFormat(shape= JsonFormat.Shape.STRING, pattern="dd/MM/yyyy HH:mm:ss")
 	private Long timeStamp;
 	
 	public StandardError(Integer statusHttp, String msg, Long timeStamp) {
