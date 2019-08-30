@@ -16,7 +16,7 @@ public class ClienteService {
 	private ClienteRepository clienteRepository;
 	
 	
-	public Cliente buscaPorId(Integer id) {
+	public Cliente find(Integer id) {
 		Optional<Cliente> c = clienteRepository.findById(id);
 		return c.orElseThrow(() -> new ObjectNotFoundExeception("Cliente não encontrado! Id: " +id+ ", Tipo: " +Cliente.class.getName()));
 	}
