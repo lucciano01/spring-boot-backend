@@ -34,7 +34,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardError> validation(MethodArgumentNotValidException e, HttpServletRequest req){
 		
-		ValidationError erro = new ValidationError(HttpStatus.BAD_REQUEST.value(), e.getMessage(), new Date().getTime());
+		ValidationError erro = new ValidationError(HttpStatus.BAD_REQUEST.value(),"Erro de validação", new Date().getTime());
 		
 		for(FieldError err : e.getBindingResult().getFieldErrors()) {
 			erro.addError(err.getField(), err.getDefaultMessage());
