@@ -11,6 +11,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.luciano.cursomc.domain.Categoria;
+import com.luciano.cursomc.domain.Cliente;
 import com.luciano.cursomc.dto.CategoriaDTO;
 import com.luciano.cursomc.repositories.CategoriaRepository;
 import com.luciano.cursomc.services.exceptions.DataIntegrityException;
@@ -36,8 +37,9 @@ public class CategoriaService {
 	}
 
 	public Categoria update(Categoria categoria) {
-		find(categoria.getId());
-		return repo.save(categoria);
+		Categoria newCategoria = find(categoria.getId());
+		updateData(newCategoria, categoria);
+		return repo.save(newCategoria);
 	}
 
 	public void delete(Integer id) {
@@ -63,6 +65,11 @@ public class CategoriaService {
 	
 	public Categoria fromDTO(CategoriaDTO categoriaDTO) {
 		return new Categoria(categoriaDTO.getId(), categoriaDTO.getNome());
+	}
+	
+	private void updateData(Categoria newCategoria, Categoria oldCategoria) {
+		newCategoria.setNome(oldCategoria.getNome());
+		
 	}
 
 }
