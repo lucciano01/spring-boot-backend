@@ -21,7 +21,7 @@ import com.luciano.cursomc.dto.ClienteDTO;
 import com.luciano.cursomc.repositories.ClienteRepository;
 import com.luciano.cursomc.repositories.EnderecoRepository;
 import com.luciano.cursomc.services.exceptions.DataIntegrityException;
-import com.luciano.cursomc.services.exceptions.ObjectNotFoundExeception;
+import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class ClienteService {
@@ -34,7 +34,7 @@ public class ClienteService {
 		
 	public Cliente find(Integer id) {
 		Optional<Cliente> c = clienteRepository.findById(id);
-		return c.orElseThrow(() -> new ObjectNotFoundExeception("Cliente não encontrado! Id: " +id+ ", Tipo: " +Cliente.class.getName()));
+		return c.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! Id: " +id+ ", Tipo: " +Cliente.class.getName()));
 	}
 	
 	public Cliente update(Cliente cliente) {

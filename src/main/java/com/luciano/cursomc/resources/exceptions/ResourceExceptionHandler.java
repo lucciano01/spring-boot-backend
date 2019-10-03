@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.luciano.cursomc.services.exceptions.DataIntegrityException;
-import com.luciano.cursomc.services.exceptions.ObjectNotFoundExeception;
+import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
 @ControllerAdvice
 public class ResourceExceptionHandler {
 	
-	@ExceptionHandler(ObjectNotFoundExeception.class)
-	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundExeception e, HttpServletRequest req){
+	@ExceptionHandler(ObjectNotFoundException.class)
+	public ResponseEntity<StandardError> objectNotFound(ObjectNotFoundException e, HttpServletRequest req){
 		
 		StandardError erro = new StandardError(HttpStatus.NOT_FOUND.value(), e.getMessage(), new Date().getTime());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(erro);

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.luciano.cursomc.domain.Pedido;
 import com.luciano.cursomc.repositories.PedidoRepository;
-import com.luciano.cursomc.services.exceptions.ObjectNotFoundExeception;
+import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
 public class PedidoService {
@@ -18,7 +18,7 @@ public class PedidoService {
 	
 	public Pedido find(Integer id) {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
-		return pedido.orElseThrow(()-> new ObjectNotFoundExeception("Pedido não encontrado! Id:" +id+ " Tipo: " + Pedido.class.getName()));
+		return pedido.orElseThrow(()-> new ObjectNotFoundException("Pedido não encontrado! Id:" +id+ " Tipo: " + Pedido.class.getName()));
 	}
 
 }

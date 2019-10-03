@@ -11,11 +11,10 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.luciano.cursomc.domain.Categoria;
-import com.luciano.cursomc.domain.Cliente;
 import com.luciano.cursomc.dto.CategoriaDTO;
 import com.luciano.cursomc.repositories.CategoriaRepository;
 import com.luciano.cursomc.services.exceptions.DataIntegrityException;
-import com.luciano.cursomc.services.exceptions.ObjectNotFoundExeception;
+import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
 //anotacao da classe de servico
 @Service
@@ -28,7 +27,7 @@ public class CategoriaService {
 	// optional dá a opcao de retonar nulo sem erro de nullpointer
 	public Categoria find(Integer id) {
 		Optional<Categoria> categoria = repo.findById(id);
-		return categoria.orElseThrow(() -> new ObjectNotFoundExeception(
+		return categoria.orElseThrow(() -> new ObjectNotFoundException(
 				"Objeto não encontrado! Id: " + id + " , Tipo: " + Categoria.class.getName()));
 	}
 
