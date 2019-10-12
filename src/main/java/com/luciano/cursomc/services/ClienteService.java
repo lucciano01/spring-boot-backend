@@ -3,14 +3,13 @@ package com.luciano.cursomc.services;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.luciano.cursomc.domain.Cidade;
 import com.luciano.cursomc.domain.Cliente;
@@ -89,7 +88,7 @@ public class ClienteService {
 		newCliente.setEmail(oldCliente.getEmail());
 	}
 	
-	
+	@Transactional(readOnly=true)
 	public Cliente insert(Cliente cliente) {
 		//enderecoRepository.saveAll(cliente.getEnderecos());
 		return clienteRepository.save(cliente);
