@@ -11,12 +11,10 @@ import org.springframework.transaction.annotation.Transactional;
 import com.luciano.cursomc.domain.ItemPedido;
 import com.luciano.cursomc.domain.PagamentoComBoleto;
 import com.luciano.cursomc.domain.Pedido;
-import com.luciano.cursomc.domain.Produto;
 import com.luciano.cursomc.domain.enums.EstadoPagamento;
 import com.luciano.cursomc.repositories.ItemPedidoRepository;
 import com.luciano.cursomc.repositories.PagamentoRepository;
 import com.luciano.cursomc.repositories.PedidoRepository;
-import com.luciano.cursomc.repositories.ProdutoRepository;
 import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
 @Service
@@ -41,6 +39,9 @@ public class PedidoService {
 	@Autowired
 	private ClienteService clienteService;
 	
+	@Autowired
+	private IEmail emailService;
+	
 	public Pedido find(Integer id) {
 		Optional<Pedido> pedido = pedidoRepository.findById(id);
 		return pedido.orElseThrow(()-> new ObjectNotFoundException("Pedido não encontrado! Id:" +id+ " Tipo: " + Pedido.class.getName()));
@@ -64,9 +65,10 @@ public class PedidoService {
 			ip.setProduto(produtoService.findById(ip.getProduto().getId()));
 			ip.setPreco(ip.getProduto().getPreco());
 			ip.setPedido(pedido);
+			
 		}
 		itemPedidoRepository.saveAll(pedido.getItens());
-		System.out.println(pedido);
+		emailService.sendOrderConfirmationEmail(pedido);
 		return pedido;
 	}
 
