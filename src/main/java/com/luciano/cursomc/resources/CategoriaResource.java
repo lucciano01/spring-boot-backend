@@ -40,7 +40,6 @@ public class CategoriaResource {
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public ResponseEntity<Void> insert(@Valid @RequestBody CategoriaDTO categoriaDTO){
-	//	
 		Categoria categoria = service.fromDTO(categoriaDTO);
 		categoria = service.insert(categoria);
 		//retorno da uri do recurso de criação essa é uma boa prática
