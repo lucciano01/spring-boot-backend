@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.luciano.cursomc.services.DBService;
 import com.luciano.cursomc.services.IEmail;
@@ -35,6 +36,11 @@ public class DevConfig {
 	@Bean
 	public IEmail emailService() {
 		return new SmtpEmailService();
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder password() {
+		return new BCryptPasswordEncoder();
 	}
 
 }

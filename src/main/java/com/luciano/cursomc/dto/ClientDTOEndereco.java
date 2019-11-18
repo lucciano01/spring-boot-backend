@@ -40,6 +40,9 @@ public class ClientDTOEndereco implements Serializable {
 	
 	private Integer cidadeId;
 	
+	@NotEmpty(message="Campo obgrigatório")
+	private String senha;
+	
 	public ClientDTOEndereco() {
 		
 	}
@@ -147,6 +150,16 @@ public class ClientDTOEndereco implements Serializable {
 	public void setCidadeId(Integer cidadeId) {
 		this.cidadeId = cidadeId;
 	}
+
+	public String getSenha() {
+		return senha;
+	}
+
+	public void setSenha(String senha) {
+		this.senha = senha;
+	}
+	
+	
 	
 	
 	
