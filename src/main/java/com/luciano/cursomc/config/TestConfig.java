@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.mail.javamail.JavaMailSender;
 
 import com.luciano.cursomc.services.DBService;
 import com.luciano.cursomc.services.IEmail;
 import com.luciano.cursomc.services.MockEmailService;
+import com.luciano.cursomc.services.SmtpEmailService;
 
 @Configuration
 @Profile("test")
@@ -28,5 +30,8 @@ public class TestConfig {
 	public IEmail emailService() {
 		return new MockEmailService();
 	}
+	
+
+	
 
 }
