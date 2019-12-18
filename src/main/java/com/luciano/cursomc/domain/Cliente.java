@@ -11,10 +11,14 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.luciano.cursomc.domain.enums.Perfil;
@@ -48,7 +52,7 @@ public class Cliente implements Serializable {
 	@JsonIgnore
 	private List<Pedido> pedidos = new ArrayList<>();
 	
-	@ElementCollection
+	@ElementCollection(fetch= FetchType.EAGER)
 	@CollectionTable(name = "PERFIS")
 	private Set<Integer>perfis = new HashSet<Integer>();
 	
