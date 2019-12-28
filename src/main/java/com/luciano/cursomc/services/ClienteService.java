@@ -15,11 +15,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.luciano.cursomc.domain.Cidade;
 import com.luciano.cursomc.domain.Cliente;
 import com.luciano.cursomc.domain.Endereco;
+import com.luciano.cursomc.domain.enums.Perfil;
 import com.luciano.cursomc.domain.enums.TipoCliente;
 import com.luciano.cursomc.dto.ClientDTOEndereco;
 import com.luciano.cursomc.dto.ClienteDTO;
 import com.luciano.cursomc.repositories.ClienteRepository;
 import com.luciano.cursomc.repositories.EnderecoRepository;
+import com.luciano.cursomc.security.UserSS;
+import com.luciano.cursomc.services.exceptions.AuthorizationException;
 import com.luciano.cursomc.services.exceptions.DataIntegrityException;
 import com.luciano.cursomc.services.exceptions.ObjectNotFoundException;
 
@@ -34,8 +37,19 @@ public class ClienteService {
 	
 	@Autowired
 	private BCryptPasswordEncoder password;
+
+	private UserSS user;
 		
 	public Cliente find(Integer id) {
+		
+		user = UserService.authenticated();
+		
+		
+		if(user == null || !user.hasRole(Perfil.ADMIN)	&& !id.equals(user.getId())){
+			throw new AuthorizationException("Acesso negado");
+		}
+				
+		
 		Optional<Cliente> c = clienteRepository.findById(id);
 		return c.orElseThrow(() -> new ObjectNotFoundException("Cliente não encontrado! Id: " +id+ ", Tipo: " +Cliente.class.getName()));
 	}
@@ -97,6 +111,8 @@ public class ClienteService {
 		//enderecoRepository.saveAll(cliente.getEnderecos());
 		return clienteRepository.save(cliente);
 	}
+	
+	
 
 
 }
